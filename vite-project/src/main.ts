@@ -31,7 +31,7 @@ function createPerson(value: unknown) {
 
 createPerson('Fuji')
 
-// Object, object & {} types
+// Object, object & {} types, which one ?
 const carModel: object = { //no primitive types
     mercedez: 'G-Wagon',
     BMW: 'M-Competetion',
@@ -45,6 +45,22 @@ console.log(typeof bicycleNumbers)
 const appliances: Object = true // allows every value except null & undefined
 console.log(typeof appliances)
 
+// tuple types
+const group: [string, number, undefined, boolean] = ['Justin', 27, undefined, false];
+// tuple types has fixed size & element in it has a distinct type
+// all you need to get  a tupke type is to explicitly annotate 😂😂🤦‍♂️
+let [firstname, birthAge, something, tall] = group;
+
+type Peeps = [name: string, age: number, status: boolean] // tuple with labels as meta information
+
+const Peep: [string, number, boolean] = ['suleiman', 22, true] // tuple without labels
+
+//tuples can also be used to annotate function arguements
+function hello(...args: Peeps) {
+    console.log('hello', ...args)
+}
+// if you need to collect arguements use tuples before you use them in your code
+hello(...Peep)
 // type arch = {
 
 //     name: string,
