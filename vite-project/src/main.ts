@@ -61,75 +61,95 @@ function hello(...args: Peeps) {
 }
 // if you need to collect arguements use tuples before you use them in your code
 hello(...Peep)
-// type arch = {
 
-//     name: string,
-//     age: number,
-//     married: boolean
+//interface versus type aliases
+// declaration merging: one of the important diff that distinguish type alias and interface
+interface match {
+    hit: string,
+    at: number
+}
+
+interface match {
+    timeOf: number
+}
+
+const applyMatch: match = {
+    hit: 'bad vibez',
+    at: 2024,
+    timeOf: 20
+}
+
+type arch = {
+    name: string,
+    age: number,
+    married: boolean
+}
+
+function createP() {
+    return { name: 'abdulrahman', age: 23, married: true }
+}
+
+const me: arch = createP();
+
+console.log(me)
+
+// new example extending interface vs type alias
+type Shop = {
+    doll: boolean,
+    toys: boolean,
+    chairs: boolean
+}
+
+type Shopy = {
+    books: string[],
+}
+
+const allShop: Shop | Shopy = {
+    doll: true,
+    toys: true,
+    chairs: false,
+    books: ['get rich quick', 'before they arrive']
+}
+console.log(allShop)
+
+// calling math.random
+// function randomCall() {
+//     let call = Math.random() * 6 //math.random returns a random number from 0 to 1, then we multiply by 6
+//     return Math.floor(call) //math.floor return a round down of the number passed as the argument to an integer
 // }
-// function createP() {
-//     return { name: 'abdulrahman', age: 23, married: true }
-// }
-
-// const me: arch = createP()
-
-// console.log(me)
-// // new example extending interface vs type alias
-// type Shop = {
-//     doll: boolean,
-//     toys: boolean,
-//     chairs: boolean
-// }
-
-// type Shopy = {
-//     books: boolean
-// }
-
-// const allShop: Shop | Shopy = {
-//     doll: true,
-//     toys: true,
-//     chairs: false
-// }
-
-// // calling math.random
-// // function randomCall() {
-// //     let call = Math.random() * 6 //math.random returns a random number from 0 to 1, then we multiply by 6
-// //     return Math.floor(call) //math.floor return a round down of the number passed as the argument to an integer
-// // }
-// // console.log(randomCall() + 1)
+// console.log(randomCall() + 1)
 
 
-// // pick random array function
-// const names: string[] = ['Suleiman', 'Zainab', 'Habiba', 'Abdulrahman', 'Munira', 'Hanifa', 'Toyyib', 'Musa', 'Nassib', 'Firdausi', 'Zaysham']
+// pick random array element function
+type randomNames = string[];
+const names = ['Suleiman', 'Zainab', 'Habiba', 'Abdulrahman', 'Munira', 'Hanifa', 'Toyyib', 'Musa', 'Nassib', 'Firdausi', 'Zaysham']
 
-// function randomPick(arrNames: string[]): string {
-//     let choice = Math.floor(Math.random() * arrNames.length)
-//     return arrNames[choice]
-// }
-// console.log(randomPick(names));
+function randomPick(arrNames: randomNames): string {
+    let choice = Math.floor(Math.random() * arrNames.length)
+    console.log(choice)
+    return arrNames[choice]
+}
+console.log(randomPick(names));
 
-// // type assertion with roll dice function
-// type Dice = 1 | 2 | 3| 4 | 5 | 6
+// type assertion with roll dice function
+type Dice = 1 | 2 | 3| 4 | 5 | 6
 
-// function rollDice(): Dice {
-//     let num;
-//     num = Math.floor(Math.random() * 6) + 1
-//     return num as Dice;
-// }
+function rollDice(): Dice {
+    let num;
+    num = Math.floor(Math.random() * 6) + 1
+    return num as Dice;
+}
 
-// console.log(rollDice())
+console.log(rollDice())
 
-// const names = ['Josh', 'Marcel', 'Sadiq']
-// let data: Array<info> = []
+const nameless = ['Josh', 'Marcel', 'Sadiq']
+let data: Array<info> = []
 
-// type info = {
-//     name: string,
-//     age?: number,
-//     married?: boolean
-// }
-
-// let test = "prime";
-// test = "proven";
+type info = {
+    name: string,
+    age?: number,
+    married?: boolean
+}
 
 // function onboard({name, age, married}: info) {
 //  data.push({name: name, age: age, married: married})
