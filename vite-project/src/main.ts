@@ -139,7 +139,6 @@ function rollDice(): Dice {
     num = Math.floor(Math.random() * 6) + 1
     return num as Dice;
 }
-
 console.log(rollDice())
 
 const nameless = ['Josh', 'Marcel', 'Sadiq']
