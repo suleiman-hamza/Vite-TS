@@ -157,6 +157,39 @@ type info = {
 // onboard({name: 'suleiman', age: 22, married: false})
 // console.log(data)
 
-// function greet(name: string): string {
-//     return "Hello, " + name.toUpperCase() + "!!"
-// }
+function greet(name: string): string {
+    return "Hello, " + name.toUpperCase() + "!!"
+}
+// object
+type Pointer = {
+    x: number
+    y: number
+}
+
+function printCoord(pt: Pointer) {
+    console.log("The Coordinate value ox x is", + pt.x)
+    console.log("The Coordinate value ox y is", + pt.y)
+}
+
+const pointerobj = {
+    x: 654.3,
+    y: 546.90
+}
+
+printCoord(pointerobj)
+
+//optional properties
+function printName(obj: {first: string, last?: string}) {
+    console.log(obj.first, obj.last?.toUpperCase())
+}
+
+printName({first: 'alice'})
+
+//Union Types
+function printID(id: string | number) {
+    console.log(id)
+}
+
+printID("fortnite"); // 100% works
+// won't work because its not string or number printID({alloy});
+
