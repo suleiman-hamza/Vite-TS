@@ -183,7 +183,7 @@ function printName(obj: {first: string, last?: string}) {
     console.log(obj.first, obj.last?.toUpperCase())
 }
 
-printName({first: 'alice'})
+printName({first: 'alice'});
 
 //Union Types
 function printID(id: string | number) {
@@ -193,3 +193,114 @@ function printID(id: string | number) {
 printID("fortnite"); // 100% works
 // won't work because its not string or number printID({alloy});
 
+const date = new Date().toUTCString();
+const dateB = new Date().getDate();
+console.log(date);
+console.log(dateB);
+
+//Type System
+//UNION TYPES
+type BoardGame = {
+    name: string
+    price: number
+    quantity: number
+    minimumAge: number
+    players: number
+}
+
+type PuzzleGame = {
+    name: string
+    price: number
+    quantity: number
+    minimumAge: number
+    pieces: number
+}
+
+type Doll = {
+    name: string;
+    price: number;
+    quantity: number;
+    minimumAge: number;
+    material: string;
+};
+
+// super type that represent the base of all toys
+type ToyBase2 = {
+    name: string
+    price: number
+    quantity: number
+    minimumAge: number
+}
+
+//better option represents all possible toys
+type Toy = Doll | PuzzleGame | BoardGame
+
+function printToys(toy: ToyBase2) {
+    return toy;
+}
+
+const doll = {
+    name: 'Mickey Mouse',
+    price: 9.99,
+    quantity: 2,
+    minimumAge: 20,
+    material: 'Splush'
+}
+
+const puzzle = {
+    name: 'Cross word',
+    price: 19.99,
+    quantity: 1,
+    minimumAge: 10,
+    pieces: 7
+}
+
+const result = printToys(doll)
+console.log(result)
+
+//INTERSECTION TYPES
+
+type ToyBase = {
+    name: string
+    price: number
+    quantity: number
+    minimumAge: number
+}
+
+type BoardGame2 = ToyBase & {
+    players: number
+}
+
+type Doll2 = ToyBase & {
+    material: string
+}
+
+function printAnotherToy(toy: Doll2) {
+    console.log(toy)
+}
+
+const anotherDoll = {
+    name: 'Barbie',
+    price: 6.99,
+    quantity: 3,
+    minimumAge: 12,
+    material: 'cotton'
+}
+
+printAnotherToy(anotherDoll);
+
+// union of interfaces
+interface Arsenal {
+    player: string
+    position: string
+    number: number
+}
+
+type Showcase = Arsenal & {
+    location: string
+}
+
+// interfaces can only extend an object type or intersection of object types
+interface club extends Showcase {
+
+}
