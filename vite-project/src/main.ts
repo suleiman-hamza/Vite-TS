@@ -339,5 +339,54 @@ function area(shape: Shape) {
     }
 }
 
+// looking at the properties for rectangle, see that it contains the same properties as Triangle:
+
 const printArea = area({x: 8})
 console.log(printArea)
+
+// To make each part of a union is distinguishable, we extend our models with an identifying property that makes absolutely clear what we are dealing with
+// This addition of a kind property. This property takes a string literal type identifying the part of the model
+
+/*This can happen through the addition of a kind property. This property takes a string
+literal type identifying the part of the model*/
+type Circle2 = {
+    radius: number;
+    kind: 'circle'
+}
+type Square2 = {
+    x: number;
+    kind: 'square'
+}
+type Triangle2 = {
+    x: number;
+    y: number;
+    kind: 'triangle'
+}
+
+type Shape2 = Triangle2 | Circle2 | Square2
+
+/*Note that we don’t set kind to string but to the exact literal type "circle" (or
+"square" and "triangle", respectively). This is a type, not a value, but the only com‐
+patible value is the literal string*/
+
+/*Adding the kind property with string literal types ensures there can’t be any overlap
+between parts of the union, as the literal types are not compatible with one another.
+This technique is called discriminated union types*/
+
+function area2(shape: Shape2) {
+    switch(shape.kind) {
+        case "triangle":
+            return (shape.x * shape.y) / 2;
+        case "circle":
+            return Math.PI * shape.radius * shape.radius;
+        case "square":
+            return shape.x * shape.x;
+        default:
+            throw Error('not possible')
+    }
+}
+const printArea2 = area2({
+    x: 8,
+    kind: 'square'
+})
+console.log(printArea2)
