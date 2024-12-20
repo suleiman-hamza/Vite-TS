@@ -304,3 +304,40 @@ type Showcase = Arsenal & {
 interface club extends Showcase {
 
 }
+//3.2 Explicitly Defining Models with Discriminated Union Types
+
+type Circle = {
+    radius: number;
+};
+
+type Square = {
+    x: number;
+}
+
+type Triangle = {
+    x: number;
+    y : number;
+}
+
+type Rectangle ={
+    x: number;
+    y : number;
+}
+
+type Shape = Triangle | Circle | Square | Rectangle; 
+// Parts of your modeled union type have a huge overlap in their properties
+/**There's some similarities btw the types but there is also still enough 
+information to differentiate between them in an area function**/
+
+function area(shape: Shape) {
+    if('radius' in shape) {
+        return Math.PI * shape.radius * shape.radius
+    } else if ('y' in shape) {
+        return 1/2 * (shape.x * shape.y)
+    } else {
+        return `Square is ${shape.x * shape.x} cm in area`
+    }
+}
+
+const printArea = area({x: 8})
+console.log(printArea)
